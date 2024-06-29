@@ -6,4 +6,6 @@ public interface UserService {
 
     void registerUser(UserDTO userDTO);
 
+    void updateUser(String id,UserDTO userDTO);
+
 }
