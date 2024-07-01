@@ -96,7 +96,7 @@ public class VehicleController {
         }
     }
 
-    @GetMapping
+    @GetMapping(value = "/exists")
     public ResponseEntity<?> isVehicleExists(@RequestParam String id){
         logger.info("Received request for check vehicle exists");
         try {

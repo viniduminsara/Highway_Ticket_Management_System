@@ -19,7 +19,7 @@ public class TicketDTO {
     @Null
     private String ticketId;
 
-    @NotNull(message = "Status cannot be null")
+    @Null
     private TicketStatus status;
 
     @Null

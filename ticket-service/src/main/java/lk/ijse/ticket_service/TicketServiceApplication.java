@@ -10,11 +10,6 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 public class TicketServiceApplication {
 
-	@Bean
-	ModelMapper modelMapper(){
-		return new ModelMapper();
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}

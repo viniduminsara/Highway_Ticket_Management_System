@@ -26,7 +26,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public void registerVehicle(VehicleDTO vehicleDTO) {
-        Boolean isUserExists = restTemplate.getForObject("http://user-service/api/v1/users?id=" + vehicleDTO.getUserId(), Boolean.class);
+        var isUserExists = restTemplate.getForObject("http://user-service/api/v1/users?id=" + vehicleDTO.getUserId(), Boolean.class);
         if (Boolean.FALSE.equals(isUserExists)){
             throw new NotFoundException("User not found");
         }
