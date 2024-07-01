@@ -2,6 +2,7 @@ package lk.ijse.ticket_service.service.impl;
 
 import lk.ijse.ticket_service.dto.TicketDTO;
 import lk.ijse.ticket_service.entity.TicketEntity;
+import lk.ijse.ticket_service.enums.TicketStatus;
 import lk.ijse.ticket_service.exception.NotFoundException;
 import lk.ijse.ticket_service.repository.TicketRepository;
 import lk.ijse.ticket_service.service.TicketService;
@@ -45,6 +46,7 @@ public class TicketServiceImpl implements TicketService {
     public void updateTicketStatus(String id, String collectedLocation) {
         Optional<TicketEntity> ticketEntity = ticketRepo.findById(id);
         if (ticketEntity.isEmpty()) throw new NotFoundException("Ticket not found");
+        ticketEntity.get().setStatus(TicketStatus.PAID);
         ticketEntity.get().setCollectedLocation(collectedLocation);
         ticketEntity.get().setCollectedAt(Timestamp.valueOf(LocalDateTime.now()));
     }
