@@ -8,4 +8,6 @@ public interface UserService {
 
     void updateUser(String id,UserDTO userDTO);
 
+    boolean isUserExists(String id);
+
 }

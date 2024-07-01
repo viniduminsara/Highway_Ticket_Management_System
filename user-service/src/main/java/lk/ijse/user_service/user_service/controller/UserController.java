@@ -18,7 +18,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping
+    @GetMapping(value = "/health")
     public String health(){
         return "User Ok";
     }
@@ -50,6 +50,15 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (NotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> isUserExists(@RequestParam String id){
+        try {
+            return ResponseEntity.ok(userService.isUserExists(id));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

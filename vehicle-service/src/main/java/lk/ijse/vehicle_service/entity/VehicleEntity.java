@@ -16,9 +16,14 @@ public class VehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String vehicleId;
+
     @Column(unique = true)
     private String registrationNo;
+
     private String model;
+
     private int year;
+
+    private String userId;
 
 }

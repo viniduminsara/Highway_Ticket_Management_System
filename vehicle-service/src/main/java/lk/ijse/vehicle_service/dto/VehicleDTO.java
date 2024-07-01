@@ -1,6 +1,7 @@
 package lk.ijse.vehicle_service.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +19,13 @@ public class VehicleDTO {
     @NotBlank(message = "Registration number cannot be null")
     private String registrationNo;
 
-    @NotBlank(message = "Model cannot be null")
+    @NotBlank(message = "Model cannot be blank")
     private String model;
 
-    @NotBlank(message = "Year cannot be null")
+    @NotNull(message = "Year cannot be null")
     private int year;
+
+    @NotBlank(message = "User id cannot be blank")
+    private String userId;
 
 }

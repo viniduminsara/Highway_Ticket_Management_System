@@ -14,4 +14,6 @@ public interface VehicleService {
 
     void updateVehicle(String id, VehicleDTO vehicleDTO);
 
+    boolean isVehicleExists(String id);
+
 }

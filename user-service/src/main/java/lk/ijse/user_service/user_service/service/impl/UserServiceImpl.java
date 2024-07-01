@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
         System.out.println(userEntity.get());
     }
 
+    @Override
+    public boolean isUserExists(String id) {
+        return userRepo.existsById(id);
+    }
+
 }
