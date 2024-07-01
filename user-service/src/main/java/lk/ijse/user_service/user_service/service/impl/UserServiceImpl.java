@@ -2,6 +2,7 @@ package lk.ijse.user_service.user_service.service.impl;
 
 import lk.ijse.user_service.user_service.dto.UserDTO;
 import lk.ijse.user_service.user_service.entity.UserEntity;
+import lk.ijse.user_service.user_service.exception.DuplicateException;
 import lk.ijse.user_service.user_service.exception.NotFoundException;
 import lk.ijse.user_service.user_service.repository.UserRepository;
 import lk.ijse.user_service.user_service.service.UserService;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserDTO userDTO) {
+        if (userRepo.existsByEmail(userDTO.getEmail())){
+            throw new DuplicateException("Email us already exists");
+        }
         userRepo.save(conversion.convertUserEntity(userDTO));
     }
 
