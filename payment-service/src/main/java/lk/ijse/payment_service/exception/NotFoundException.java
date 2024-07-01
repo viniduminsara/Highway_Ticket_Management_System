@@ -1,4 +1,4 @@
-package exception;
+package lk.ijse.payment_service.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message){
