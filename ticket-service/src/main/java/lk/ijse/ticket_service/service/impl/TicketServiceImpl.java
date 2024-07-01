@@ -60,7 +60,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public boolean isTicketExpired(String id) {
+    public boolean isTicketExists(String id) {
         return ticketRepo.existsById(id);
     }
 }

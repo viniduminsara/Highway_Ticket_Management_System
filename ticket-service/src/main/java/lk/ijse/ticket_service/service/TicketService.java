@@ -14,6 +14,6 @@ public interface TicketService {
 
     void updateTicketStatus(String id, String collectedLocation);
 
-    boolean isTicketExpired(String id);
+    boolean isTicketExists(String id);
 
 }

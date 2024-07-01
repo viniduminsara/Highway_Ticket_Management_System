@@ -35,6 +35,7 @@ public class TicketController {
         }
         try {
             ticketService.createTicket(ticketDTO);
+            logger.info("Request processed successfully");
             return ResponseEntity.status(HttpStatus.CREATED).body("Ticket created successfully");
         } catch (NotFoundException e){
             logger.warn("Not found error: {}", e.getMessage());
@@ -75,6 +76,7 @@ public class TicketController {
         logger.info("Received request for update a ticket status");
         try {
             ticketService.updateTicketStatus(id, collectedLocation);
+            logger.info("Request processed successfully");
             return ResponseEntity.status(HttpStatus.OK).body("Ticket updated successfully");
         } catch (NotFoundException e){
             logger.warn("Not found error: {}", e.getMessage());
@@ -85,11 +87,11 @@ public class TicketController {
         }
     }
 
-    @GetMapping
+    @GetMapping(value = "/exists")
     public ResponseEntity<?> isTicketExists(@RequestParam String id){
         logger.info("Received request for check ticket exists");
         try {
-            return ResponseEntity.ok(ticketService.isTicketExpired(id));
+            return ResponseEntity.ok(ticketService.isTicketExists(id));
         } catch (Exception e){
             logger.error("An exception occurred: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
