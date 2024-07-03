@@ -1,6 +1,7 @@
 package lk.ijse.user_service.user_service.controller;
 
 import jakarta.validation.Valid;
+import lk.ijse.user_service.user_service.dto.CredentialDTO;
 import lk.ijse.user_service.user_service.dto.UserDTO;
 import lk.ijse.user_service.user_service.exception.DuplicateException;
 import lk.ijse.user_service.user_service.exception.NotFoundException;
@@ -75,6 +76,21 @@ public class UserController {
         try {
             return ResponseEntity.ok(userService.isUserExists(id));
         } catch (Exception e){
+            logger.error("An exception occurred: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/verify", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> verifyUser(@Valid @RequestBody CredentialDTO credentialDTO, BindingResult bindingResult){
+        logger.info("Received request for verify a user");
+        if (bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(bindingResult.getFieldErrors().get(0).getDefaultMessage());
+        }
+        try {
+            return ResponseEntity.ok(userService.verifyUser(credentialDTO));
+        }catch (Exception e){
             logger.error("An exception occurred: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

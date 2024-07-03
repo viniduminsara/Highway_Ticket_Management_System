@@ -1,5 +1,6 @@
 package lk.ijse.user_service.user_service.service.impl;
 
+import lk.ijse.user_service.user_service.dto.CredentialDTO;
 import lk.ijse.user_service.user_service.dto.UserDTO;
 import lk.ijse.user_service.user_service.entity.UserEntity;
 import lk.ijse.user_service.user_service.exception.DuplicateException;
@@ -43,6 +44,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isUserExists(String id) {
         return userRepo.existsById(id);
+    }
+
+    @Override
+    public boolean verifyUser(CredentialDTO credentialDTO) {
+        Optional<UserEntity> userEntity = userRepo.findByEmail(credentialDTO.getEmail());
+        return userEntity.filter(entity -> credentialDTO.getPassword().equals(entity.getPassword())).isPresent();
     }
 
 }
